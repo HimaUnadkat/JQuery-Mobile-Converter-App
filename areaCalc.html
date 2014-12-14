@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="jquery.mobile-1.4.2.min.css">
+
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.4.2.min.js"></script>
+<script type="text/javascript">
+    var atoh=2.4711;   //acre to hectare
+    var atosm=0.00024711; // acre to square meter
+    var htosm=0.00010000; //hectare to square meter
+    var smtoh=10000;
+    var yardtoacre= 0.00020661; //square yard to acre
+    var acretoyard=4840.0;
+    var yardtohec=11960;
+    var syardtosm=1.1960;
+   // var smtoa=0.00024711;
+    
+    $(document).ready(function() {
+          //called when key is pressed in textbox
+  $(".validateArea").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+    $("#area_ac").keyup(function() {
+            $("#area_hc").val($("#area_ac").val()/atoh);  // acre to hectare
+              $("#area_sqm").val($("#area_ac").val()/atosm);  // acre to square meter
+              $("#area_syard").val($("#area_ac").val()*acretoyard); //acre to yard
+           
+        
+    });
+    //hectare to acre
+    $("#area_hc").keyup(function() {
+            $("#area_ac").val($("#area_hc").val()*atoh);  //  hectare to acre
+              $("#area_sqm").val($("#area_hc").val()/htosm);  //  hectare to square meters
+                $("#area_syard").val($("#area_hc").val()*yardtohec);  //  hectare to square yard
+           
+        
+    });
+    //square meter to...
+    $("#area_sqm").keyup(function() {
+            $("#area_ac").val($("#area_sqm").val()*atosm);  //  sqm to acre
+              $("#area_hc").val($("#area_sqm").val()*htosm);  //  sqm to hectare 
+               $("#area_syard").val($("#area_sqm").val()*syardtosm);  //  sqm to s yard
+           
+        
+    });
+    
+     //square yard to...
+    $("#area_syard").keyup(function() {
+            $("#area_ac").val($("#area_syard").val()*yardtoacre);  //  yard  to acre
+              $("#area_hc").val($("#area_syard").val()/yardtohec);  //  s yard to hectare 
+               $("#area_sqm").val($("#area_syard").val()/syardtosm);  //  s yard to s meter
+               
+    });
+    });
+  
+</script>
+    </head>
+    <body>
+        <div data-role="page" id="pagetwo">
+        <div data-role="header">
+    <h1>Convert KG to POUND</h1>
+    <div data-role="navbar">
+      <ul>
+          <li><a href="index.html" data-icon="home">Home</a></li>
+                         <li><a href="distance.html" data-icon="arrow-r">Calculate Distance</a></li>
+        <li><a href="information.html" data-icon="info">Information about Converter App</a></li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p></p>
+       <span id="errmsg"></span>
+     <div data-role="collapsible">
+    <h4>Acre: &nbsp;&nbsp;&nbsp;</h4>
+     
+     <a href="#popupBasic" data-rel="popup" data-transition="pop">More about Acre</a>
+<div data-role="popup" id="popupBasic">
+    <p><strong>Acre:</strong>Used widely in the US customary system and the Imperial system.This unit of area has the international symbol of ac.</p>
+
+</div>
+     <input type="text" id="area_ac" placeholder="Acre" class="validateArea" />
+    
+    </div>
+    
+    <div data-role="collapsible">
+     <h4> Hectare
+         &nbsp;&nbsp;&nbsp;</h4>
+     <a href="#popupHectare" data-rel="popup" data-transition="pop">More about Hectare</a>
+<div data-role="popup" id="popupHectare">
+    <p><strong>Hectare:</strong>hectare can be named one of the most commonly used unit of area as it is accepted both by the SI and the Imperial system. 
+    The symbol accepted for hectare both in SI and the Imperial system is ha.</p>
+
+</div>
+     <input type="text" id="area_hc" placeholder="Hectare" class="validateArea" />
+ </div>
+    
+      <div data-role="collapsible">
+          <h4> Square Meter
+              &nbsp;&nbsp;&nbsp;</h4>
+     <a href="#popupsqm" data-rel="popup" data-transition="pop">More about Square Meter</a>
+<div data-role="popup" id="popupsqm">
+    <p><strong>Square Meter:</strong>A measurement of area equal to one meter length by one meter width.</p>
+
+</div>
+    <input type="text" id="area_sqm" placeholder="Square meter" class="validateArea"/>
+      </div>
+      <div data-role="collapsible">
+          <h4>Square Yard </h4>
+    <a href="#popupsqm" data-rel="popup" data-transition="pop">More about Square Yard</a>
+<div data-role="popup" id="popupsqm">
+    <p><strong>Square Yard:</strong></p>
+</div>
+    <input type="text" id="area_syard" placeholder="Square Yard" class="validateArea"/>	
+   
+      </div>
+    <div data-role="main" class="ui-content">
+    <!-- pop up-->
+        <a href="#myPopuparea" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Me Formula</a>
+   <div data-role="popup" id="myPopuparea" class="ui-content">
+      <h3>Here is a formula...</h3>
+      <p><strong> Acre to Hectare : </strong>ha =ac /2.4711</p>
+      <p><strong> Square meter to Acre      :</strong>ac =m² * 0.00024711</p>
+      <p><strong>Acre to Square meter:</strong>m²=ac/0.00024711</p>
+      <p><strong>square yard to acre :</strong>ac =yd² * 0.00020661</p>
+      <p><strong>acre to yard:</strong>yd² =ac * 4840.0</p>
+        <p><strong>square yard to square meter:</strong>m² =yd²/1.1960</p>
+          <p><strong>square meter to square yard:</strong>yd² =m² * 1.1960</p>
+    </div>
+        <!-- pop up ends-->
+    
+ <a href="#" class="ui-btn" data-rel="back">Go Back</a>
+</div>
+  <div data-role="footer">
+    <h1>Copyright NPU @2014</h1>
+  </div>
+    </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Length/Distance Converter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="jquery.mobile-1.4.2.min.css">
+        <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="jquery.mobile-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="pageone">
+            <div data-role="header">
+                <h1>Convertable Units</h1>
+                <div data-role="navbar">
+                    <ul>
+                         <li><a href="index.html" data-icon="home">Home</a></li>
+                         <li><a href="areaCalc.html" data-icon="arrow-r">Area Calculator</a></li>
+        <li><a href="information.html" data-icon="info">Information about Converter App</a></li>
+        
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <h2>Distance Calculator</h2>
+                <span id="errmsg"></span>
+                <div data-role="collapsible" data-mini="true" >
+                    <h4>  Kilometer: &nbsp;&nbsp;&nbsp;</h4>
+
+                    <a href="#popupkm" data-rel="popup" data-transition="pop">More about   Kilometer</a>
+                    <div data-role="popup" id="popupkm">
+                        <p><strong>  Kilometer:</strong>Used widely in the US customary system and the Imperial system.This unit of area has the international symbol of ac.</p>
+
+                    </div>
+                    <input id="km" type="text" placeholder="Kilometer" class="validateDistance">
+
+                </div>
+
+
+
+                <div data-role="collapsible" data-mini="true">
+                    <h4>Mile: &nbsp;&nbsp;&nbsp;</h4>
+
+                    <a href="#popupmile" data-rel="popup" data-transition="pop">More about Mile:</a>
+                    <div data-role="popup" id="popupmile">
+                        <p><strong>Mile:</strong>Used widely in the US customary system and the Imperial system.This unit of area has the international symbol of ac.</p>
+
+                    </div>
+                    <input id="mile" type="text" placeholder="Mile" class="validateDistance"/>
+
+                </div>
+
+
+
+                <div data-role="collapsible" data-mini="true">
+                    <h4>Inch: &nbsp;&nbsp;&nbsp;</h4>
+
+                    <a href="#popupinch" data-rel="popup" data-transition="pop">More about Inch</a>
+                    <div data-role="popup" id="popupinch">
+                        <p><strong>Inch:</strong>Used widely in the US customary system and the Imperial system.This unit of area has the international symbol of ac.</p>
+
+                    </div>
+                    <input id="inch" type="text" placeholder="Inch" class="validateDistance"/>
+
+                </div>
+
+
+
+
+                <div data-role="collapsible" data-mini="true">
+                    <h4>Feet: &nbsp;&nbsp;&nbsp;</h4>
+
+                    <a href="#popupfeet" data-rel="popup" data-transition="pop">More about Feet</a>
+                    <div data-role="popup" id="popupfeet">
+                        <p><strong>Feet:</strong>Used widely in the US customary system and the Imperial system.This unit of area has the international symbol of ac.</p>
+
+                    </div>
+                    <input id="feet" type="text" placeholder="Feet" class="validateDistance"/>
+
+                </div>
+
+
+                <!-- Centimeter: <input id="cm" type="text" placeholder="Centimeter"/>-->
+
+                <div data-role="collapsible" data-mini="true">
+                    <h4>Meter:&nbsp;&nbsp;&nbsp;</h4>
+
+                    <a href="#popupmeter" data-rel="popup" data-transition="pop">More about Meter</a>
+                    <div data-role="popup" id="popupmeter">
+                        <p><strong>Meter:</strong>Used widely in the US customary system and the Imperial system.This unit of area has the international symbol of ac.</p>
+
+                    </div>
+                    <input id="meter" type="text" placeholder="Meter" class="validateDistance"/>
+
+                </div>
+
+
+                <!-- Yard: <input id="yard" type="text" placeholder="Yard"/>-->
+
+<div data-role="footer">
+    <h1>Copyright NPU @2014</h1>
+  </div>
+
+            </div>
+            <!-- pop up-->
+            <a href="#myPopupdistance" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Me Formula</a>
+            <div data-role="popup" id="myPopupdistance" class="ui-content">
+                <h3>Here is a formula...</h3>
+                <p><strong> Kilometer to Miles : </strong>mi =km * 0.62137</p>
+                <p><strong> miles to kilometer      :</strong>km =mi/0.62137</p>
+                <p><strong>kilometer  to meter:</strong>m =km /0.0010000</p>
+                <p><strong>Kilometer to inches :</strong>in = km * 39370</p>
+                <p><strong>inch to kilometer:</strong>km = in /39370</p>
+                <p><strong>Meter to inch:</strong>m = in/ 39.370</p>
+                <p><strong>Feet to kilometer:</strong>km = ft/3280.8</p>
+            </div>
+            <!-- pop up ends-->
+        </div>
+        <script type="text/javascript">
+
+            var kmtomile = 0.62137;
+            var kmtometer = 1000.0;
+            var miletometer = 1609.3;
+            var kmtoinch = 39370;
+            var miletoinch = 63360;
+            var metertoinch = 39.370;
+            var kmtofeet = 3280.8;
+            var miletofeet = 5280.0;
+            var metertofeet = 3.2808;
+            var inchtofeet = 12.000;
+
+            $(document).ready(function() {
+                $(".validateDistance").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+                //km to...
+                $("#km").keyup(function() {
+                    $("#mile").val($("#km").val() * kmtomile);  // km to mile
+                    $("#meter").val($("#km").val() * kmtometer);  // km to meter
+                    $("#inch").val($("#km").val() * kmtoinch);  // km to inches   
+                    $("#feet").val($("#km").val() * kmtofeet);  // km to inches   
+
+
+                });
+
+                //mile to...
+                $("#mile").keyup(function() {
+                    $("#km").val($("#mile").val() / kmtomile);  //  mile to km
+                    $("#meter").val($("#mile").val() * miletometer);  //  mile to meter
+                    $("#inch").val($("#mile").val() * miletoinch);  //  mile to inches
+                    $("#feet").val($("#mile").val() * miletofeet);  //  mile to feet
+
+
+                });
+
+                //meter to...
+                $("#meter").keyup(function() {
+                    $("#km").val($("#meter").val() / kmtometer);  //  meter to km
+                    $("#mile").val($("#meter").val() / miletometer);  //  meter to mile
+                    $("#inch").val($("#meter").val() * metertoinch);  //  meter to inch
+
+                    $("#feet").val($("#meter").val() * metertofeet);  //  meter to inch
+
+                });
+                //inches to...
+                $("#inch").keyup(function() {
+                    $("#km").val($("#inch").val() / kmtoinch);  //  inch to km
+                    $("#mile").val($("#inch").val() / miletoinch);  //  inch to mile
+                    $("#meter").val($("#inch").val() / metertoinch);  //  inch to mile
+                    $("#feet").val($("#inch").val() / inchtofeet);  //  inch to mile
+
+
+                });
+
+
+                $("#feet").keyup(function() {
+                    $("#km").val($("#feet").val() / kmtofeet);  //  feetto km
+                    $("#mile").val($("#feet").val() / miletofeet);  //  feet to mile
+                    $("#meter").val($("#feet").val() / metertofeet);  //  feet to mile
+                    $("#inch").val($("#feet").val() * inchtofeet);  //  feet to inch
+
+
+                });
+
+
+            });
+
+        </script>
+    </body>
+</html>

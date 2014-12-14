@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="jquery.mobile-1.4.2.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript">
+
+            var kg = 0.45359237;
+            var kgToGram = 1000;
+            var gramToKg = 0.001;
+            var gramToLbs = 0.0022;
+            var lbToGram = 453.6;
+            var oz = 35.274;
+            var oztolbs = 0.062500;
+            var lbstooz = 16.00;
+            var oztogram = 0.035274;
+            var gramtooz = 28.350;
+
+            $(document).ready(function() {
+                $(".validate").keypress(function(e) {
+                    //if the letter is not digit then display error and don't type anything
+                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                        //display error message
+                        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                        return false;
+                    }
+                });
+                $("#weight_value").keyup(function() {
+                    $("#weight_val ").val(Math.round($("#weight_value").val() / kg));  // kg to lbs
+                    $("#weight_grams").val(Math.round($("#weight_value").val() * kgToGram));   //kg to gram
+                    $("#weight_oz").val(Math.round($("#weight_value").val() * oz));   //kg to oz
+
+
+                });
+                $("#weight_val").keyup(function() {
+
+                    $("#weight_value").val(Math.round($("#weight_val").val() * kg));   //lbs to kg
+                    $("#weight_grams").val(Math.round($("#weight_val").val() * lbToGram));   //lbs to gram
+                    $("#weight_oz").val(Math.round($("#weight_val").val() * lbstooz));
+                });
+
+                $("#weight_grams").keyup(function() {
+
+                    $("#weight_value").val(Math.round($("#weight_grams").val() * gramToKg));   //gram to kg
+                    $("#weight_val").val(Math.round($("#weight_grams").val() * gramToLbs));     //gram to lb
+                    $("#weight_oz").val(Math.round($("#weight_grams").val() / gramtooz));     //gram to oz
+
+                });
+
+                $("#weight_oz").keyup(function() {
+                    $("#weight_val").val(Math.round($("#weight_oz").val() * oztolbs));  // oz to lbs
+                    $("#weight_grams").val(Math.round($("#weight_oz").val() / oztogram));   //oz to gram
+                    $("#weight_value").val(Math.round($("#weight_oz").val() / oz));   //oz to kg
+
+
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+
+        <div data-role="page" id="pageone">
+            <div data-role="header" >
+                <h1>Convertable Units</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="index.html" data-icon="home">Home</a></li>
+                        <li><a href="information.html" data-icon="info">Information about Converter App</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <h2>Select</h2>
+                <form>
+                    <input data-type="search" id="searchForCollapsibleSet" placeholder="Search Here..">
+                </form>
+                <div data-role="collapsibleset"  data-filter="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
+                    <div data-role="collapsible" >
+                        <h4>Weight Converter</h4>
+
+                        <ul data-role="listview"  data-inset="true">
+                            <li><a href="#pagetwo">Convert Weight</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div data-role="collapsible">
+                        <h4>Temperature Converter</h4>
+
+                        <ul data-role="listview" data-input="#myFilter1" data-filter="true" data-autodividers="true" data-inset="true">
+                            <li><a href="temperatureCalc.html" target="_blank">Convert Temperature</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div data-role="collapsible">
+                        <h4>Area Converter</h4>
+                        <ul data-role="listview" data-autodividers="true" data-inset="true">
+                            <li><a href="areaCalc.html" target="_blank">Calculate Area</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div data-role="collapsible">
+                        <h4>Mortgage Calculator</h4>
+                        <ul data-role="listview" data-inset="true">
+                            <li><a href="mortgageCalc.html" target="_blank">Calculate Mortgage</a></li>
+                        </ul>
+                    </div>
+
+                    <div data-role="collapsible">
+                        <h4>Distance Calculator</h4>
+                        <ul data-role="listview" data-inset="true">
+                            <li><a href="distance.html" target="_blank">Calculate Distance</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div data-role="collapsible">
+                        <h4>Tip Calculator</h4>
+                        <form class="ui-filterable">
+                            <input id="myFilter2" data-type="search" placeholder="Search for names..">
+                        </form>
+                        <ul data-role="listview" data-input="#myFilter2" data-filter="true" data-inset="true">
+                            <li><a href="TipCalcSplitWise.html" target="_blank">Calculate Tip and Split among Friends</a></li>
+                            <li><a href="TipCalc.html" target="_blank">Calculate Tip Only</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div data-role="footer">
+                    <h1>Copyright NPU @2014</h1>
+                </div>
+                <!--Page 2 starts here weight kg-lbs-->
+            </div> </div>
+        <div data-role="page" id="pagetwo">
+            <div data-role="header">
+                <h1>Convert Weights</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="index.html" data-icon="home">Home</a></li>
+                        <li><a href="TipCalcSplitWise.html" data-icon="arrow-r">Split Tips</a></li>
+                        <li><a href="information.html" data-icon="info">Information about Converter App</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <p></p>
+                <span id="errmsg"></span>
+                <label> Enter Weight to Convert:</label>
+                <div data-role="collapsible">
+                    <h4>Kilogram: &nbsp;&nbsp;&nbsp;</h4>
+
+                    <a href="#popupkg" data-rel="popup" data-transition="pop">More about Kilogram:</a>
+                    <div data-role="popup" id="popupkg">
+                        <p><strong>Kilogram:</strong>The kilogram or kilogramme (SI unit symbol: kg; SI dimension symbol: M), is the base unit of mass in the International System of Units (SI) (the Metric system) and is defined as being equal to the mass of the International Prototype of the Kilogram (IPK)</p>
+
+                    </div>
+                    <input type="text" id="weight_value" placeholder="Kilogram" class="validate" />
+
+                </div>
+
+                <div data-role="collapsible">
+                    <h4>  Lbs: &nbsp;&nbsp;&nbsp;</h4>
+                    <a href="#popuplb" data-rel="popup" data-transition="pop">More about Lb</a>
+                    <div data-role="popup" id="popuplb">
+                        <p><strong>LBS:</strong>The pound or pound-mass (abbreviations: lb, lbm, lbm, ℔[1]) is a unit of mass used in the imperial, United States customary and other systems of measurement.</p>
+                    </div>
+                    <input type="text" id="weight_val" placeholder="LBS" class="validate" />
+                </div>
+
+                <div data-role="collapsible">
+                    <h4>  Gram: &nbsp;&nbsp;&nbsp;</h4>
+                    <a href="#popupgram" data-rel="popup" data-transition="pop">More about Gram</a>
+                    <div data-role="popup" id="popupgram">
+                        <p><strong>Gram:</strong>The gram (alternative British English spelling: gramme;[1] SI unit symbol: g) (Greek/Latin root grámma) is a metric system unit of mass.
+
+                            Originally defined as "the absolute weight of a volume of pure water equal to the cube of the hundredth part of a metre, and at the temperature of melting ice"</p>
+                    </div>
+                    <input type="text" id="weight_grams" placeholder="Gram" class="validate"/>
+                </div>
+
+                <div data-role="collapsible">
+                    <h4>     ounce: &nbsp;&nbsp;&nbsp;</h4>
+                    <a href="#popupounce" data-rel="popup" data-transition="pop">More about Acre</a>
+                    <div data-role="popup" id="popupounce">
+                        <p><strong>Ounce:</strong>An ounce (abbreviated oz; apothecary symbol: ℥) is usually the international avoirdupois ounce as used in the United States customary and British imperial systems, which is equal to one-sixteenth of a pound or approximately 28 grams; however, other definitions of ounce (most importantly, the international troy ounce) are used in a number of different measurement systems. The abbreviation "oz" derives from the Italian word onza (now spelled oncia).</p>
+                    </div>
+                    <input type="text" id="weight_oz" placeholder="ounce " class="validate" />
+                </div>
+
+                <div data-role="main" class="ui-content">
+                    <!-- pop up-->
+                    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Me Formula</a>
+                    <div data-role="popup" id="myPopup" class="ui-content">
+                        <h3>Here is a formula...</h3>
+                        <p><strong> Gram To pound(lbs) : </strong>g =lb /0.0022046 </p>
+                        <p><strong> Pound to Gram      :</strong>lb =g * 0.0022046</p>
+                        <p><strong>Pound(lbs) to ounce :</strong>lb =oz * 0.062500</p>
+                        <p><strong>Oz to Gram           :</strong>g =oz/0.035274</p>
+                    </div>
+                    <!-- pop up ends-->
+
+                    <a href="#" class="ui-btn" data-rel="back">Go Back</a>
+                </div>
+                <a href="#pageone">Go to Page One</a>
+            </div>
+        </div>
+    </body>
+</html>

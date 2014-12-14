@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="jquery.mobile-1.4.2.min.css">
+ <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.4.2.min.js"></script><script type="text/javascript">
+         var div=0.55555555;  //5/9=0.55555555
+         var divC=1.8; //9/5=1.8
+         var kelvin=273.15;
+$(document).ready(function() {
+    $(".validateTemp").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+    $("#temp_c").keyup(function() {
+            $("#temp_f").val(Math.round(($("#temp_c").val()*divC)+32));  // c to f
+           $("#temp_k").val(Math.round(parseInt(($("#temp_c").val())))+parseInt(kelvin));    //c to k
+           
+    });
+    //f to c
+     $("#temp_f").keyup(function() {
+         
+            $("#temp_c").val(Math.round(($("#temp_f").val()-32)*div));  // kg to lbs
+             $("#temp_k").val(Math.round((parseInt(($("#temp_f").val()))-32)*div)+parseInt(kelvin));    //c to k
+         
+    });
+    $("#temp_k").keyup(function() {
+            $("#temp_c").val(Math.round($("#temp_k").val()-kelvin));  // k to c
+            $("#temp_f").val(Math.round((parseInt(($("#temp_k").val()))-parseInt(kelvin))*divC)+32);    //c to k
+         
+    });
+});
+
+</script>
+    </head>
+    <body>
+         <div data-role="page" id="pageone">
+        <div data-role="header">
+    <h1>Convert Temperature</h1>
+    <div data-role="navbar">
+      <ul>
+         <li><a href="index.html" data-icon="home">Home</a></li>
+                         <li><a href="mortgageCalc.html" data-icon="arrow-r">Calculate Mortgage</a></li>
+        <li><a href="information.html" data-icon="info">Information about Converter App</a></li>
+        
+        
+      </ul>
+    </div>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p></p>
+    
+    <label> Enter Temperature:</label>
+    <span id="errmsg"></span>
+    <div data-role="collapsible">
+    <h4> Celsius: &nbsp;&nbsp;&nbsp;</h4>
+      <a href="#popupcelsius" data-rel="popup" data-transition="pop">More about Celsius</a>
+<div data-role="popup" id="popupcelsius">
+    <p><strong>Celsius:</strong>Celsius, also known as centigrade, is a scale and unit of measurement for temperature.Since the 19th century, the scientific
+        and thermometry communities worldwide referred to this scale as the centigrade scale.</p>
+
+</div>
+    <input type="text" id="temp_c" placeholder="Celsius" class="validateTemp" />
+    
+    </div>
+   
+    <div data-role="collapsible">
+    <h4> Fahrenheit: &nbsp;&nbsp;&nbsp;</h4>
+    
+    
+    <a href="#popupFahrenheit" data-rel="popup" data-transition="pop">More about Fahrenheit</a>
+<div data-role="popup" id="popupFahrenheit">
+    <p><strong>Fahrenheit</strong>Fahrenheit is used in the Bahamas, Belize, the Cayman Islands, Palau, and the United States and associated territories (Puerto Rico, Guam and the U.S. Virgin Islands) for everyday applications. For example, U.S. weather forecasts, food cooking, and freezing temperatures are typically given in degrees Fahrenheit. Scientists, such as meteorologists, use Celsius or Kelvin in all countries.</p>
+
+</div>
+    <input type="text" id="temp_f" placeholder="Fahrenheit" class="validateTemp"/>
+    </div>
+    
+    <div data-role="collapsible">
+    <h4> Kelvin: &nbsp;&nbsp;&nbsp;</h4>
+    
+    <a href="#popupkelvin" data-rel="popup" data-transition="pop">More about Kelvin</a>
+<div data-role="popup" id="popupkelvin">
+    <p><strong>Kelvin:</strong>The kelvin is a unit of measurement for temperature. It is one of the seven base units in the International System of Units (SI) and is assigned the unit symbol K. </p>
+</div>
+    <input type="text" id="temp_k" placeholder="Kelvin" class="validateTemp"/>
+    </div> 	
+   
+    <div data-role="main" class="ui-content">
+    <!-- pop up-->
+        <a href="#myPopuptemp" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Me Formula</a>
+   <div data-role="popup" id="myPopuptemp" class="ui-content">
+      <h3>Here is a formula...</h3>
+      <p><strong>Fahrenheit to Celsius : </strong>C = 5/9 (F-32)</p>
+      <p><strong> Celsius to Fahrenheit  :</strong>F = 9/5 (C+32)</p>
+      <p><strong> Celsius to Kelvin :</strong>K = C + 273.15 </p>
+       <p><strong> Kelvin to Celsius :</strong>C= K - 273.15 </p>
+       <p><strong> Fahrenheit to Kelvin :</strong>K= (F - 32) * 5 / 9 + 273.15</p>
+       <p><strong> Kelvin to Fahrenheit:</strong>F =(K - 273.15)* 1.8000 + 32.00</p>
+       
+    </div>
+        <!-- pop up ends-->
+    
+ <a href="#" class="ui-btn" data-rel="back">Go Back</a>
+</div>
+  <div data-role="footer">
+    <h1>Copyright NPU @2014</h1>
+  </div>
+    </div>
+    </div>
+    </body>
+</html>

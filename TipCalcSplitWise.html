@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="jquery.mobile-1.4.2.min.css">
+        <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                //called when key is pressed in textbox
+  $(".validate").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+              $("#amount").keyup(function(){
+     
+       var amount = $('#amount').val();
+                    var percentage = $('#percentage').val();
+                    var split = $('#split').val();
+                    var tip = amount * (percentage / 100);
+                    var total = Number(amount) + tip;
+                    var itotal = total / split;
+                    $("#tip").val(tip.toFixed(2));
+                    $("#total").val(total.toFixed(2));
+                    if ($("#split").val() != 0 || $("#split").val() != "") {
+                        $("#itotal").val(itotal.toFixed(2));
+                    }
+
+                    else {
+                        $("#itotal").val(0.0);
+                    }
+
+    }); 
+     $("#percentage").keyup(function(){
+     
+       var amount = $('#amount').val();
+                    var percentage = $('#percentage').val();
+                    var split = $('#split').val();
+                    var tip = amount * (percentage / 100);
+                    var total = Number(amount) + tip;
+                    var itotal = total / split;
+                    $("#tip").val(tip.toFixed(2));
+                    $("#total").val(total.toFixed(2));
+                    if ($("#split").val() != 0 || $("#split").val() != "") {
+                        $("#itotal").val(itotal.toFixed(2));
+                    }
+
+                    else {
+                        $("#itotal").val(0.0);
+                    }
+
+    }); 
+     $("#split").keyup(function(){
+     
+       var amount = $('#amount').val();
+                    var percentage = $('#percentage').val();
+                    var split = $('#split').val();
+                    var tip = amount * (percentage / 100);
+                    var total = Number(amount) + tip;
+                    var itotal = total / split;
+                    $("#tip").val(tip.toFixed(2));
+                    $("#total").val(total.toFixed(2));
+                    if ($("#split").val() != 0 || $("#split").val() != "") {
+                        $("#itotal").val(itotal.toFixed(2));
+                    }
+
+                    else {
+                        $("#itotal").val(0.0);
+                    }
+
+    }); 
+            });
+           
+            </script>    
+    </head>
+    <body>
+        <div data-role="page" id="pageone">
+            <div data-role="header">
+                <h1>Convertable Units</h1>
+                <div data-role="navbar">
+                    <ul>
+                         <li><a href="index.html" data-icon="home">Home</a></li>
+                         <li><a href="TipCalc.html" data-icon="arrow-r">Only Tip Calculator</a></li>
+        <li><a href="information.html" data-icon="info">Information about Converter App</a></li>
+        
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <h2>Tip Calculator</h2>
+              
+                    <span id="errmsg"></span>
+                    <p>Amount: <input id="amount" type="text" placeholder="Bill Amount" class="validate"/>
+                    <p>Tip Percentage: <input id="percentage" type="text" placeholder="Tip Percentage" class="validate"/></p>
+                    <p>Split Among # of people: <input id="split" type="text" placeholder="Split Among No of people" class="validate"/></p>
+                    <!--<input type="submit" value="Calculate" id="calc" data-theme="b">-->
+                    <hr />
+                    <p>Tip: <input id="tip" placeholder="Tip Amount" readonly="readonly"/></p>
+                    <p>Total: <input id="total"  placeholder="Total To Pay" readonly="readonly" /></p>
+                    <p>Individual Total: <input id="itotal" readonly="readonly"  placeholder="Total To Pay per person" /></p>
+                    <!--<p><input type="submit" /></p>-->
+             <div data-role="footer">
+    <h1>Copyright NPU @2014</h1>
+  </div>
+            </div>
+            
+        </div>
+        
+
+       
+    </body>
+</html>
